@@ -1,5 +1,6 @@
 package pages;
 
+import domain.Dates;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -10,10 +11,22 @@ public class RateYourHappinessModal extends BasePage {
     public static final By SLIDER_CSS = By.cssSelector(".ui-slider-handle");
     public static final By UPDATE_MOOD_BUTTON_CSS = By.cssSelector("button.ButtonUpdate");
     public static final By DESCRIPTION_TEXT_AREA_ID = By.id("TextBoxUpdateMoodTag");
+    public static final By NOW_BUTTON_CSS = By.cssSelector(".ResetNow");
+    public static final By YESTERDAY_BUTTON_CSS = By.cssSelector(".ResetYesterday");
+    public static final By RESET_2_DAY_BUTTON_CSS = By.cssSelector(".Reset2day");
+    public static final By RESET_3_DAY_BUTTON_CSS = By.cssSelector(".Reset3day");
 
     public MoodUpdatedModal updateMood(String moodRating, String description) {
         updateMood(moodRating);
         updateDescription(description);
+        $(UPDATE_MOOD_BUTTON_CSS).click();
+        return new MoodUpdatedModal();
+    }
+
+    public MoodUpdatedModal updateMood(String moodRating, String description, Dates date) {
+        updateMood(moodRating);
+        updateDescription(description);
+        updateDate(date);
         $(UPDATE_MOOD_BUTTON_CSS).click();
         return new MoodUpdatedModal();
     }
@@ -41,5 +54,22 @@ public class RateYourHappinessModal extends BasePage {
 
     private void updateDescription(String description) {
         $(DESCRIPTION_TEXT_AREA_ID).sendKeys(description);
+    }
+
+    private void updateDate(Dates date) {
+        switch (date) {
+            case NOW:
+                $(NOW_BUTTON_CSS).click();
+                break;
+            case YESTERDAY:
+                $(YESTERDAY_BUTTON_CSS).click();
+                break;
+            case DAYS_AGO_2:
+                $(RESET_2_DAY_BUTTON_CSS).click();
+                break;
+            case DAYS_AGO_3:
+                $(RESET_3_DAY_BUTTON_CSS).click();
+                break;
+        }
     }
 }

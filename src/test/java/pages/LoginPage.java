@@ -16,7 +16,9 @@ public class LoginPage extends BasePage {
     public static final By GP_ICON_CSS = By.cssSelector("[alt='MoodPanda Android App on Google Play']");
 
     public FeedPage login(String email, String password) {
+        $(EMAIL_CSS).click();
         $(EMAIL_CSS).sendKeys(email);
+        $(PASS_CSS).click();
         $(PASS_CSS).sendKeys(password);
         $(LOGIN_BTN_CSS).click();
         return new FeedPage();

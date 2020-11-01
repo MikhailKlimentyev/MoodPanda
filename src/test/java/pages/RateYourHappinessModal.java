@@ -15,6 +15,8 @@ public class RateYourHappinessModal extends BasePage {
     public static final By YESTERDAY_BUTTON_CSS = By.cssSelector(".ResetYesterday");
     public static final By RESET_2_DAY_BUTTON_CSS = By.cssSelector(".Reset2day");
     public static final By RESET_3_DAY_BUTTON_CSS = By.cssSelector(".Reset3day");
+    public static final By HOURS_SELECT_ID = By.id("ddlHistoricHour");
+    public static final By MINUTES_SELECT_ID = By.id("ddlHistoricMinute");
 
     public MoodUpdatedModal updateMood(String moodRating, String description) {
         updateMood(moodRating);
@@ -24,11 +26,15 @@ public class RateYourHappinessModal extends BasePage {
     }
 
     public MoodUpdatedModal updateMood(String moodRating, String description, Dates date) {
-        updateMood(moodRating);
-        updateDescription(description);
         updateDate(date);
-        $(UPDATE_MOOD_BUTTON_CSS).click();
-        return new MoodUpdatedModal();
+        return updateMood(moodRating, description);
+    }
+
+    public MoodUpdatedModal updateMood(String moodRating, String description, Dates date, String hours, String minutes) {
+        updateDate(date);
+        updateHours(hours);
+        updateMinutes(minutes);
+        return updateMood(moodRating, description);
     }
 
     @Override
@@ -54,6 +60,14 @@ public class RateYourHappinessModal extends BasePage {
 
     private void updateDescription(String description) {
         $(DESCRIPTION_TEXT_AREA_ID).sendKeys(description);
+    }
+
+    private void updateHours(String hours) {
+        $(HOURS_SELECT_ID).selectOptionByValue(hours);
+    }
+
+    private void updateMinutes(String minutes) {
+        $(MINUTES_SELECT_ID).selectOptionByValue(minutes);
     }
 
     private void updateDate(Dates date) {

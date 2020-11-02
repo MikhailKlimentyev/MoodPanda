@@ -25,7 +25,7 @@ public class MyMoodPage extends BasePage {
 
     @Override
     public MyMoodPage isPageOpened() {
-        $(PANDA_IMAGE_CSS).click();
+        explicitWaitElementVisible(PANDA_IMAGE_CSS);
         return this;
     }
 }

@@ -1,15 +1,19 @@
 package tests;
 
 import domain.Dates;
+import io.qameta.allure.Feature;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.MyMoodPage;
 
 import static domain.Dates.*;
 
+@Feature("MoodPandaTest")
 public class MoodPandaTest extends BaseTest {
 
-    @Test(dataProvider = "datesDataProvider")
+    @Test(description = "Mood rating and description should be as specified ones",
+            dataProvider = "datesDataProvider")
     public void moodRatingDescriptionShouldBeAsSpecifiedOnes(Dates date) {
         String expectedMoodRating = "8";
         String expectedDescription = "Description";
@@ -38,7 +42,8 @@ public class MoodPandaTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "datesHoursMinutesDataProvider")
+    @Test(description = "Mood rating and description should be as expected after changing hours and minutes",
+            dataProvider = "datesHoursMinutesDataProvider")
     public void moodRatingDescriptionShouldBeAsExpectedAfterChangingHoursAndMinutes(Dates date, String hours,
                                                                                     String minutes) {
         String expectedMoodRating = "8";
@@ -72,7 +77,7 @@ public class MoodPandaTest extends BaseTest {
         };
     }
 
-    @Test
+    @Test(description = "Mood rating, description, year, month, day should be as expected")
     public void moodRatingDescriptionYearMonthDayShouldBeAsExpected() {
         String expectedMoodRating = "8";
         String expectedDescription = "Description";
@@ -96,5 +101,6 @@ public class MoodPandaTest extends BaseTest {
         moodValidation
                 .validateMood(actualRate, expectedMoodRating, actualDescription, expectedDescription,
                         actualDate, expectedDate);
+        Assert.fail();
     }
 }

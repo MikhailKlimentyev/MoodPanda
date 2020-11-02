@@ -1,6 +1,7 @@
 package pages;
 
 import domain.Dates;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -23,6 +24,7 @@ public class RateYourHappinessModal extends BasePage {
 
     public static String dayPattern = "//*[@class='ui-datepicker-calendar']//*[text()='%s']";
 
+    @Step("Update mood with {moodRating} and {description}")
     public MoodUpdatedModal updateMood(String moodRating, String description) {
         updateMood(moodRating);
         updateDescription(description);
@@ -30,11 +32,13 @@ public class RateYourHappinessModal extends BasePage {
         return new MoodUpdatedModal();
     }
 
+    @Step("Update mood with {moodRating}, {description} and {date}")
     public MoodUpdatedModal updateMood(String moodRating, String description, Dates date) {
         updateDate(date);
         return updateMood(moodRating, description);
     }
 
+    @Step("Update mood with {moodRating}, {description}, {date}, {hours}, {minutes}")
     public MoodUpdatedModal updateMood(String moodRating, String description, Dates date, String hours, String minutes) {
         updateDate(date);
         updateHours(hours);
@@ -42,6 +46,7 @@ public class RateYourHappinessModal extends BasePage {
         return updateMood(moodRating, description);
     }
 
+    @Step("Update mood with {moodRating}, {description}, {date}, {month}, {year}, {dayNumber}, {hours}, {minutes}")
     public MoodUpdatedModal updateMood(String moodRating, String description, Dates date,
                                        String month, String year, String dayNumber,
                                        String hours, String minutes) {

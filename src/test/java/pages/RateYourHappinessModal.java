@@ -15,8 +15,13 @@ public class RateYourHappinessModal extends BasePage {
     public static final By YESTERDAY_BUTTON_CSS = By.cssSelector(".ResetYesterday");
     public static final By RESET_2_DAY_BUTTON_CSS = By.cssSelector(".Reset2day");
     public static final By RESET_3_DAY_BUTTON_CSS = By.cssSelector(".Reset3day");
+    public static final By OLDER_DAY_BUTTON_CSS = By.cssSelector(".ResetOlder");
     public static final By HOURS_SELECT_ID = By.id("ddlHistoricHour");
     public static final By MINUTES_SELECT_ID = By.id("ddlHistoricMinute");
+    public static final By MONTH_SELECT_CLASS = By.className("ui-datepicker-month");
+    public static final By YEAR_SELECT_CLASS = By.className("ui-datepicker-year");
+
+    public static String dayPattern = "//*[@class='ui-datepicker-calendar']//*[text()='%s']";
 
     public MoodUpdatedModal updateMood(String moodRating, String description) {
         updateMood(moodRating);
@@ -32,6 +37,18 @@ public class RateYourHappinessModal extends BasePage {
 
     public MoodUpdatedModal updateMood(String moodRating, String description, Dates date, String hours, String minutes) {
         updateDate(date);
+        updateHours(hours);
+        updateMinutes(minutes);
+        return updateMood(moodRating, description);
+    }
+
+    public MoodUpdatedModal updateMood(String moodRating, String description, Dates date,
+                                       String month, String year, String dayNumber,
+                                       String hours, String minutes) {
+        updateDate(date);
+        updateMonth(month);
+        updateYear(year);
+        updateDay(dayNumber);
         updateHours(hours);
         updateMinutes(minutes);
         return updateMood(moodRating, description);
@@ -70,6 +87,18 @@ public class RateYourHappinessModal extends BasePage {
         $(MINUTES_SELECT_ID).selectOptionByValue(minutes);
     }
 
+    private void updateYear(String year) {
+        $(YEAR_SELECT_CLASS).selectOptionByValue(year);
+    }
+
+    private void updateMonth(String month) {
+        $(MONTH_SELECT_CLASS).selectOptionByValue(month);
+    }
+
+    private void updateDay(String dayNumber) {
+        $(By.xpath(String.format(dayPattern, dayNumber))).click();
+    }
+
     private void updateDate(Dates date) {
         switch (date) {
             case NOW:
@@ -83,6 +112,9 @@ public class RateYourHappinessModal extends BasePage {
                 break;
             case DAYS_AGO_3:
                 $(RESET_3_DAY_BUTTON_CSS).click();
+                break;
+            case OLDER:
+                $(OLDER_DAY_BUTTON_CSS).click();
                 break;
         }
     }

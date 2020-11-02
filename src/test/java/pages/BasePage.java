@@ -10,6 +10,6 @@ public abstract class BasePage {
     protected abstract BasePage isPageOpened();
 
     protected void explicitWaitElementVisible(By locator) {
-        $(locator).waitUntil(Condition.visible, 10000);
+        $(locator).waitUntil(Condition.visible, 15000);
     }
 }

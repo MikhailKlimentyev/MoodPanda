@@ -11,9 +11,8 @@ public class MoodValidation {
                 String.format("Mood rating %s does not match expected %s", actualMoodRating, expectedMoodRating));
         Assert.assertEquals(actualDescription, expectedDescription,
                 String.format("Description %s does not match expected %s", actualDescription, expectedDescription));
-        String subActualDate = actualDate.substring(0, actualDate.length() - 2);
-        Assert.assertEquals(subActualDate, expectedDate,
-                String.format("Date %s does not match expected %s", subActualDate, expectedDate));
+        Assert.assertTrue(actualDate.contains(expectedDate), String.format("Date %s does not contain expected %s",
+                actualDate, expectedDate));
     }
 
     public void validateMood(String actualMoodRating, String expectedMoodRating,

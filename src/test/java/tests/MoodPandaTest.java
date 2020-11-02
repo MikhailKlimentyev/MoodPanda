@@ -1,14 +1,12 @@
 package tests;
 
 import domain.Dates;
-import io.qameta.allure.Feature;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.MyMoodPage;
 
 import static domain.Dates.*;
 
-@Feature("MoodPandaTest")
 public class MoodPandaTest extends BaseTest {
 
     @Test(description = "Mood rating and description should be as specified ones",

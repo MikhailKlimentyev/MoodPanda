@@ -2,7 +2,6 @@ package tests;
 
 import domain.Dates;
 import io.qameta.allure.Feature;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.MyMoodPage;
@@ -101,6 +100,5 @@ public class MoodPandaTest extends BaseTest {
         moodValidation
                 .validateMood(actualRate, expectedMoodRating, actualDescription, expectedDescription,
                         actualDate, expectedDate);
-        Assert.fail();
     }
 }
